@@ -3,9 +3,7 @@ package com.sasanka.ManagementSystem.Controller;
 import com.sasanka.ManagementSystem.Entity.Student;
 import com.sasanka.ManagementSystem.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +21,23 @@ public class StudentController {
     @GetMapping
     public List<Student> getStudents() {
         return studentService.getStudents();
+    }
+
+    @PostMapping
+    public void addNewStudent(@RequestBody Student student) {
+        studentService.addNewStudent(student);
+    }
+
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long studentId) {
+        studentService.deleteStudent(studentId);
+    }
+
+    @PutMapping(path = "{studentId}")
+    public void updateStudent(
+            @PathVariable("studentId") Long studentId,
+            @RequestParam(required = false) String name) {
+        studentService.updateStudent(studentId, name);
     }
 }
 
