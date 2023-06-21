@@ -48,8 +48,9 @@ Content-Type: application/json
 
 ```JSON
 {
-  "name": "Sasanka Weerakoon",
-  "dob": "2000-08-13"
+    "name": "Thashini Weerakoon",
+    "dob": "2004-01-23",
+    "gender": "FEMALE"
 }
 ```
 
@@ -58,8 +59,7 @@ Content-Type: application/json
 ### GET
 
 ```
-GET /api/v1/student HTTP/1.1
-Host: localhost:8080
+GET http://localhost:8080/api/v1/student
 ```
 
 ### DELETE
@@ -72,6 +72,9 @@ DELETE http://localhost:8080/api/v1/student/2
 
 ```
 PUT http://localhost:8080/api/v1/student/2?name=Weerakoon
+```
+```
+PUT http://localhost:8080/api/v1/student/2?gender=MALE
 ```
 
 
