@@ -1,8 +1,10 @@
 package com.sasanka.ManagementSystem.Controller;
 
 import com.sasanka.ManagementSystem.Entity.Student;
+import com.sasanka.ManagementSystem.Enumeration.Gender;
 import com.sasanka.ManagementSystem.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,20 +26,23 @@ public class StudentController {
     }
 
     @PostMapping
-    public void addNewStudent(@RequestBody Student student) {
+    public ResponseEntity<String> addNewStudent(@RequestBody Student student) {
         studentService.addNewStudent(student);
+        return ResponseEntity.ok("Student added successfully as id :"+ student.getId());
     }
 
     @DeleteMapping(path = "{studentId}")
-    public void deleteStudent(@PathVariable("studentId") Long studentId) {
+    public ResponseEntity<String> deleteStudent(@PathVariable("studentId") Long studentId) {
         studentService.deleteStudent(studentId);
+        return ResponseEntity.ok("Student with id " + studentId + " deleted successfully");
     }
 
     @PutMapping(path = "{studentId}")
     public void updateStudent(
             @PathVariable("studentId") Long studentId,
-            @RequestParam(required = false) String name) {
-        studentService.updateStudent(studentId, name);
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Gender gender) {
+        studentService.updateStudent(studentId, name, gender);
     }
 }
 

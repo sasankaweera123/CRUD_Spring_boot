@@ -1,6 +1,7 @@
 package com.sasanka.ManagementSystem.Config;
 
 import com.sasanka.ManagementSystem.Entity.Student;
+import com.sasanka.ManagementSystem.Enumeration.Gender;
 import com.sasanka.ManagementSystem.Repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -17,12 +18,14 @@ public class StudentConfig {
         return args -> {
             Student sasanka =new Student(
                     "Sasanka",
-                    LocalDate.of(1998, 1, 5)
+                    LocalDate.of(1998, 1, 5),
+                    Gender.MALE
             );
 
             Student weera = new Student(
                     "Weera",
-                    LocalDate.of(2000, 1, 5)
+                    LocalDate.of(2000, 1, 5),
+                    Gender.OTHER
             );
 
             repository.saveAll(

@@ -1,6 +1,7 @@
 package com.sasanka.ManagementSystem.Service;
 
 import com.sasanka.ManagementSystem.Entity.Student;
+import com.sasanka.ManagementSystem.Enumeration.Gender;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.sasanka.ManagementSystem.Repository.StudentRepository;
@@ -39,10 +40,13 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudent(Long studentId, String name) {
+    public void updateStudent(Long studentId, String name, Gender gender) {
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student with id " + studentId + " does not exist"));
         if (name != null && name.length() > 0 && !name.equals(student.getName())){
             student.setName(name);
+        }
+        if(gender!= null && !gender.equals(student.getGender())){
+            student.setGender(gender);
         }
     }
 }
