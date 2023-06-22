@@ -49,4 +49,8 @@ public class StudentService {
             student.setGender(gender);
         }
     }
+
+    public Student getStudentById(Long studentId) {
+        return studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student with id " + studentId + " does not exist"));
+    }
 }
