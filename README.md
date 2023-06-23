@@ -59,7 +59,7 @@ Content-Type: application/json
 ### GET
 
 ```
-GET http://localhost:8080/api/v1/student
+GET http://localhost:8080/api/v1/student/list
 ```
 
 ### DELETE
@@ -77,6 +77,34 @@ PUT http://localhost:8080/api/v1/student/2?name=Weerakoon
 PUT http://localhost:8080/api/v1/student/2?gender=MALE
 ```
 
+## Custom Response
+
+```JSON
+{
+  "timeStamp": "2023-06-24T00:30:46.7208943",
+  "statusCode": 200,
+  "status": "OK",
+  "message": "Students fetched successfully",
+  "data": {
+    "Students": [
+      {
+        "id": 1,
+        "name": "Weerakoon",
+        "dob": "1998-01-05",
+        "gender": "MALE",
+        "age": 25
+      },
+      {
+        "id": 2,
+        "name": "Weera",
+        "dob": "2000-01-05",
+        "gender": "OTHER",
+        "age": 23
+      }
+    ]
+  }
+}
+```
 
 ## LICENSE
 
