@@ -30,6 +30,7 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
+      working-directory: /home/runner/work/CRUD_Spring_boot/CRUD_Spring_boot/Management-System
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
