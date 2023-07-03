@@ -29,7 +29,7 @@ public class StudentController {
     public ResponseEntity<Response> getStudents() {
         return ResponseEntity.ok(
                 Response.builder().timeStamp(LocalDateTime.now())
-                        .data(Map.of("Students", studentService.getStudents()))
+                        .data(Map.of("students", studentService.getStudents()))
                         .message("Students fetched successfully")
                         .status(OK)
                         .statusCode(OK.value())
@@ -41,7 +41,7 @@ public class StudentController {
     public ResponseEntity<Response> getStudentById(@PathVariable("studentId") Long studentId) {
         return ResponseEntity.ok(
                 Response.builder().timeStamp(LocalDateTime.now())
-                        .data(Map.of("Student", studentService.getStudentById(studentId)))
+                        .data(Map.of("student", studentService.getStudentById(studentId)))
                         .message("Student fetched successfully")
                         .status(OK)
                         .statusCode(OK.value())
@@ -54,7 +54,7 @@ public class StudentController {
         studentService.addNewStudent(student);
         return ResponseEntity.ok(
                 Response.builder().timeStamp(LocalDateTime.now())
-                        .data(Map.of("Student", studentService.getStudentById(student.getId())))
+                        .data(Map.of("student", studentService.getStudentById(student.getId())))
                         .message("Student added successfully as id :" + student.getId())
                         .status(CREATED)
                         .statusCode(CREATED.value())
@@ -82,7 +82,7 @@ public class StudentController {
         studentService.updateStudent(studentId, name, gender);
         return ResponseEntity.ok(
                 Response.builder().timeStamp(LocalDateTime.now())
-                        .data(Map.of("Student", studentService.getStudentById(studentId)))
+                        .data(Map.of("student", studentService.getStudentById(studentId)))
                         .message("Student with id " + studentId + " updated successfully")
                         .status(OK)
                         .statusCode(OK.value())
