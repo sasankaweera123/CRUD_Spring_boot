@@ -40,13 +40,16 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudent(Long studentId, String name, Gender gender) {
-        Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student with id " + studentId + " does not exist"));
-        if (name != null && name.length() > 0 && !name.equals(student.getName())){
-            student.setName(name);
+    public void updateStudent(Long studentId, Student student) {
+        Student studentFromId = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Student with id " + studentId + " does not exist"));
+        if (student.getName() != null && student.getName().length() > 0 && !student.getName().equals(studentFromId.getName())){
+            studentFromId.setName(student.getName());
         }
-        if(gender!= null && !gender.equals(student.getGender())){
-            student.setGender(gender);
+        if (student.getDob() != null && !student.getDob().equals(studentFromId.getDob())){
+            studentFromId.setDob(student.getDob());
+        }
+        if (student.getGender() != null && !student.getGender().equals(studentFromId.getGender())){
+            studentFromId.setGender(student.getGender());
         }
     }
 

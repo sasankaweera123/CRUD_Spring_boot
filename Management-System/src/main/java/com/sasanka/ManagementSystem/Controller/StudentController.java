@@ -77,9 +77,8 @@ public class StudentController {
     @PutMapping(path = "{studentId}")
     public ResponseEntity<Response> updateStudent(
             @PathVariable("studentId") Long studentId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) Gender gender) {
-        studentService.updateStudent(studentId, name, gender);
+            @RequestBody Student student) {
+        studentService.updateStudent(studentId,student);
         return ResponseEntity.ok(
                 Response.builder().timeStamp(LocalDateTime.now())
                         .data(Map.of("student", studentService.getStudentById(studentId)))
