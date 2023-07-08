@@ -118,14 +118,45 @@ class StudentServiceTest {
         String updateName = "Sasanka Weerakoon";
         Gender updateGender = Gender.OTHER;
 
+        Student updatedStudent = new Student(
+                updateName,
+                LocalDate.of(2030, 1, 5),
+                updateGender
+        );
+
         when(studentRepository.findById(id)).thenReturn(Optional.of(existingStudent)); // when the method is called, return the existing student
-        underTest.updateStudent(id, updateName, updateGender); // call the method
 
-        verify(studentRepository).findById(id); // verify that the method was called
+        underTest.updateStudent(id, updatedStudent); // call the method
 
-        assertThat(existingStudent.getName()).isEqualTo(updateName); // assert that the name is updated
-        assertThat(existingStudent.getGender()).isEqualTo(updateGender);
+        verify(studentRepository).findById(id); // verify that the findById() method was called
+        verify(studentRepository, never()).save(any(Student.class)); // verify that the save() method was not invoked
 
+        assertThat(existingStudent.getName()).isEqualTo(updateName); // assert that the existing student's name is equal to the updated name
+        assertThat(existingStudent.getGender()).isEqualTo(updateGender); // assert that the existing student's gender is equal to the updated gender
+    }
+
+    @Test
+    @Order(8)
+    void canNotUpdateStudent() {
+        Long id = 10L;
+
+        when(studentRepository.findById(id)).thenReturn(Optional.empty()); // when the method is called, return an empty Optional
+
+        String updateName = "Sasanka Weerakoon";
+        Gender updateGender = Gender.OTHER;
+
+        Student updatedStudent = new Student(
+                updateName,
+                LocalDate.of(2030, 1, 5),
+                updateGender
+        );
+
+        assertThatThrownBy(() -> underTest.updateStudent(id, updatedStudent))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("Student with id " + id + " does not exist");
+
+        verify(studentRepository).findById(id); // verify that the findById() method was called
+        verify(studentRepository, never()).save(any(Student.class)); // verify that the save() method was not invoked
     }
 
 }
