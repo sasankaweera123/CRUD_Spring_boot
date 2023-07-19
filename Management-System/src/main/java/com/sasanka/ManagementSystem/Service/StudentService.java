@@ -51,6 +51,7 @@ public class StudentService {
         if (student.getGender() != null && !student.getGender().equals(studentFromId.getGender())){
             studentFromId.setGender(student.getGender());
         }
+        studentRepository.save(studentFromId);
     }
 
     public Student getStudentById(Long studentId) {
